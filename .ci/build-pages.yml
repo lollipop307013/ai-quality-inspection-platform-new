@@ -1,0 +1,89 @@
+version: v2.0
+
+name: 构建并部署 ZhijiLab 原型
+
+on:
+  push: [main]
+
+stages:
+  - name: stage-1
+    label:
+      - Build
+    jobs:
+      deploy:
+        name: 构建并部署到 OA-Pages
+        runs-on:
+          pool-name: docker
+          needs:
+            nodejs: 22.14.0
+
+        steps:
+          - checkout: self
+            name: Checkout
+
+          - name: 提取部署变更
+            run: |
+              git fetch origin oa-pages:refs/remotes/origin/oa-pages
+              current_commit=$(git rev-parse HEAD)
+              previous_commit=$(git log -1 --format='%s' origin/oa-pages | sed -nE 's/^deploy: source ([0-9a-f]{40})$/\1/p')
+
+              if [ -z "$previous_commit" ]; then
+                previous_commit=$(git rev-parse HEAD^)
+              fi
+
+              if git merge-base --is-ancestor "$previous_commit" "$current_commit"; then
+                commit_range="$previous_commit..$current_commit"
+              else
+                commit_range="$current_commit^..$current_commit"
+              fi
+
+              commit_count=$(git rev-list --count "$commit_range")
+              displayed_commit_count=$commit_count
+              if [ "$displayed_commit_count" -gt 10 ]; then
+                displayed_commit_count=10
+              fi
+
+              previous_commit_short=$(git rev-parse --short=7 "$previous_commit")
+              current_commit_short=$(git rev-parse --short=7 "$current_commit")
+              commit_messages=$(git log -10 --format='%h %s' "$commit_range" | awk '{ printf "%s%d. %s", (NR > 1 ? "\\n" : ""), NR, $0 }')
+              if [ "$commit_count" -gt 10 ]; then
+                commit_messages="${commit_messages}\\n... 其余 $((commit_count - 10)) 个提交已省略"
+              fi
+
+              echo "::set-variable name=source_commit::$current_commit"
+              echo "::set-variable name=previous_commit_short::$previous_commit_short"
+              echo "::set-variable name=current_commit_short::$current_commit_short"
+              echo "::set-variable name=commit_count::$commit_count"
+              echo "::set-variable name=displayed_commit_count::$displayed_commit_count"
+              echo "::set-variable name=commit_messages::$commit_messages"
+
+          - name: 构建
+            run: |
+              npm ci
+              npm run build
+              printf '%s\n' 'zhijilab-prototype.pages.woa.com' > dist/CNAME
+
+          - uses: pages@1.*
+            name: 部署到 OA-Pages
+            with:
+              inputWorkspace: ${WORKSPACE}
+              inputIfCheckoutOrigin: false
+              inputPageDir: dist
+              inputIfCopyCNAME: false
+              inputCommitMsg: 'deploy: source ${{ variables.source_commit }}'
+              inputIfForcePush: true
+
+          - uses: EnterPriseWechat@1.*
+            name: 发通知-企业微信
+            with:
+              receivers:
+                - ${{ ci.actor }}
+              wechatGroupFlag: false
+              title: '【ZhijiLab 原型】OA-Pages 部署完成通知'
+              body: |-
+                本次包含 ${{ variables.commit_count }} 个提交（${{ variables.previous_commit_short }} → ${{ variables.current_commit_short }}）：
+                ${{ variables.commit_messages }}
+
+                访问地址：https://zhijilab-prototype.pages.woa.com
+              isMarDown: false
+              detailFlag: false

@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "themeName": "zhijilab",
+  "theme": {
+    "seriesCnt": "4",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "titleColor": "#242526",
+    "subtitleColor": "#8D98B2",
+    "textColorShow": false,
+    "textColor": "#242526",
+    "markTextColor": "#ffffff",
+    "color": [
+      "#005AFF",
+      "#2BDE73",
+      "#FFC120",
+      "#F44E4E",
+      "#00BCD4",
+      "#3D5AFE",
+      "#69F0AE"
+    ],
+    "borderColor": "#E1E4EB",
+    "borderWidth": 0,
+    "visualMapColor": [
+      "#005AFF",
+      "#69F0AE"
+    ],
+    "legendTextColor": "#8D98B2",
+    "kColor": "#F44E4E",
+    "kColor0": "#2BDE73",
+    "kBorderColor": "#F44E4E",
+    "kBorderColor0": "#2BDE73",
+    "kBorderWidth": 1,
+    "lineWidth": 2,
+    "symbolSize": 6,
+    "symbol": "circle",
+    "symbolBorderWidth": 1,
+    "lineSmooth": false,
+    "graphLineWidth": 1,
+    "graphLineColor": "#CAD2E5",
+    "mapLabelColor": "#242526",
+    "mapLabelColorE": "#ffffff",
+    "mapBorderColor": "#E1E4EB",
+    "mapBorderColorE": "#005AFF",
+    "mapBorderWidth": 0.5,
+    "mapBorderWidthE": 1,
+    "mapAreaColor": "#F6F8FA",
+    "mapAreaColorE": "#005AFF",
+    "axes": [
+      {
+        "type": "all",
+        "name": "General Axis",
+        "axisLineShow": true,
+        "axisLineColor": "#E1E4EB",
+        "axisTickShow": false,
+        "axisTickColor": "#E1E4EB",
+        "axisLabelShow": true,
+        "axisLabelColor": "#CAD2E5",
+        "splitLineShow": true,
+        "splitLineColor": [
+          "#F0F2F5"
+        ],
+        "splitAreaShow": false,
+        "splitAreaColor": [
+          "rgba(246,248,250,0.5)",
+          "rgba(255,255,255,0)"
+        ]
+      },
+      {
+        "type": "category",
+        "name": "Category Axis",
+        "axisLineShow": true,
+        "axisLineColor": "#E1E4EB",
+        "axisTickShow": false,
+        "axisTickColor": "#E1E4EB",
+        "axisLabelShow": true,
+        "axisLabelColor": "#CAD2E5",
+        "splitLineShow": false,
+        "splitLineColor": [
+          "#F0F2F5"
+        ],
+        "splitAreaShow": false,
+        "splitAreaColor": [
+          "rgba(246,248,250,0.5)",
+          "rgba(255,255,255,0)"
+        ]
+      },
+      {
+        "type": "value",
+        "name": "Value Axis",
+        "axisLineShow": false,
+        "axisLineColor": "#E1E4EB",
+        "axisTickShow": false,
+        "axisTickColor": "#E1E4EB",
+        "axisLabelShow": true,
+        "axisLabelColor": "#CAD2E5",
+        "splitLineShow": true,
+        "splitLineColor": [
+          "#F0F2F5"
+        ],
+        "splitAreaShow": false,
+        "splitAreaColor": [
+          "rgba(246,248,250,0.5)",
+          "rgba(255,255,255,0)"
+        ]
+      },
+      {
+        "type": "log",
+        "name": "Log Axis",
+        "axisLineShow": false,
+        "axisLineColor": "#E1E4EB",
+        "axisTickShow": false,
+        "axisTickColor": "#E1E4EB",
+        "axisLabelShow": true,
+        "axisLabelColor": "#CAD2E5",
+        "splitLineShow": true,
+        "splitLineColor": [
+          "#F0F2F5"
+        ],
+        "splitAreaShow": false,
+        "splitAreaColor": [
+          "rgba(246,248,250,0.5)",
+          "rgba(255,255,255,0)"
+        ]
+      },
+      {
+        "type": "time",
+        "name": "Time Axis",
+        "axisLineShow": true,
+        "axisLineColor": "#E1E4EB",
+        "axisTickShow": false,
+        "axisTickColor": "#E1E4EB",
+        "axisLabelShow": true,
+        "axisLabelColor": "#CAD2E5",
+        "splitLineShow": false,
+        "splitLineColor": [
+          "#F0F2F5"
+        ],
+        "splitAreaShow": false,
+        "splitAreaColor": [
+          "rgba(246,248,250,0.5)",
+          "rgba(255,255,255,0)"
+        ]
+      }
+    ],
+    "axisSeperateSetting": true,
+    "toolboxColor": "#8D98B2",
+    "toolboxEmphasisColor": "#005AFF",
+    "tooltipAxisColor": "#E1E4EB",
+    "tooltipAxisWidth": 1,
+    "timelineLineColor": "#E1E4EB",
+    "timelineLineWidth": 1,
+    "timelineItemColor": "#005AFF",
+    "timelineItemColorE": "#005AFF",
+    "timelineCheckColor": "#005AFF",
+    "timelineCheckBorderColor": "#ffffff",
+    "timelineItemBorderWidth": 1,
+    "timelineControlColor": "#005AFF",
+    "timelineControlBorderColor": "#005AFF",
+    "timelineControlBorderWidth": 0.5,
+    "timelineLabelColor": "#8D98B2",
+    "datazoomBackgroundColor": "rgba(0,0,0,0)",
+    "datazoomDataColor": "rgba(0,90,255,0.1)",
+    "datazoomFillColor": "rgba(0,90,255,0.1)",
+    "datazoomHandleColor": "#005AFF",
+    "datazoomHandleWidth": "100",
+    "datazoomLabelColor": "#8D98B2"
+  }
+}
