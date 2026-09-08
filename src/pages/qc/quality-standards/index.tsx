@@ -539,8 +539,11 @@ export default function QualityStandardsPage() {
   }
 
   return (
-    <div className="legacy-scope flex h-full">
-      <div className="flex-1 overflow-auto p-4">
+    <div
+      className="legacy-scope flex bg-white p-4"
+      style={{ margin: '-16px', minHeight: 'calc(100% + 32px)' }}
+    >
+      <div className="flex-1 overflow-auto">
         <div className="flex items-center justify-between mb-3">
           <h1 className="text-sm font-semibold text-gray-900">质检标准配置</h1>
         </div>

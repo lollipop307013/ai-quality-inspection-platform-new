@@ -1,0 +1,622 @@
+.page {
+  min-height: 100%;
+  padding: 16px;
+  background: var(--td-bg-color-page);
+  color: var(--td-text-color-primary);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.backLink {
+  color: var(--td-text-color-secondary);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--td-brand-color);
+  }
+}
+
+.breadcrumbCurrent {
+  color: var(--td-text-color-primary);
+  font-weight: 500;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tabs {
+  flex-shrink: 0;
+
+  :global(.t-tabs__header) {
+    border-bottom-color: var(--td-component-stroke);
+  }
+}
+
+.globalFilters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filterLabel {
+  color: var(--td-text-color-secondary);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.presetSelect {
+  width: 110px;
+}
+
+.channelSelect {
+  width: 110px;
+}
+
+.datePicker {
+  width: 140px;
+}
+
+.dateRangePicker {
+  width: 260px;
+}
+
+.dateSep {
+  color: var(--td-text-color-placeholder);
+  font-size: 12px;
+}
+
+.rangeLabel {
+  color: var(--td-text-color-placeholder);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* ===== 指标卡 ===== */
+.metricCards {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.metricCard {
+  position: relative;
+  min-width: 0;
+  padding: 18px 20px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--td-bg-color-container);
+  box-shadow: 0 1px 2px rgba(0, 21, 41, 0.02), 0 2px 10px rgba(0, 21, 41, 0.04);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #5B8FF9, #85A9F2);
+  }
+}
+
+.metricCardLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 10px;
+  color: var(--td-text-color-placeholder);
+  font-size: 12px;
+}
+
+.metricCardValue {
+  color: var(--td-text-color-primary);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: -0.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.metricCardsSingle {
+  margin-bottom: 16px;
+}
+
+/* ===== 图表卡 ===== */
+.chartCard {
+  margin-bottom: 16px;
+  border-radius: var(--td-radius-medium);
+  background: var(--td-bg-color-container);
+
+  :global(.t-card__body) {
+    padding: 18px;
+  }
+}
+
+.chartTitle {
+  margin-bottom: 16px;
+  color: var(--td-text-color-primary);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.trendGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.trendCol {
+  min-width: 0;
+}
+
+.trendLabel {
+  margin-bottom: 4px;
+  color: var(--td-text-color-secondary);
+  font-size: 13px;
+}
+
+.chartPlaceholder {
+  display: flex;
+  height: 180px;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--td-component-stroke);
+  border-radius: 6px;
+  color: var(--td-text-color-placeholder);
+  font-size: 13px;
+}
+
+.top5Empty {
+  padding: 32px 0;
+  color: var(--td-text-color-placeholder);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ===== 拦截原因进度行 ===== */
+.blockReasonList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.blockReasonHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.blockReasonName {
+  color: var(--td-text-color-primary);
+  font-size: 13px;
+}
+
+.blockReasonCount {
+  padding: 1px 10px;
+  border-radius: 10px;
+  color: #405680;
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.blockReasonTrack {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--td-bg-color-component);
+}
+
+.blockReasonBar {
+  height: 100%;
+  border-radius: 4px;
+}
+
+/* ===== 策略列表 ===== */
+.strategyFilters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.strategyHint {
+  color: var(--td-text-color-placeholder);
+  font-size: 12px;
+}
+
+.keywordInput {
+  margin-left: auto;
+  width: 200px;
+}
+
+.miniSelect {
+  width: 130px;
+}
+
+.strategyNameCell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.strategyNameLine {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.strategyName {
+  color: var(--td-text-color-primary);
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--td-brand-color);
+  }
+}
+
+.strategyNameActive {
+  color: var(--td-brand-color);
+  font-weight: 600;
+}
+
+.notAllowed {
+  cursor: not-allowed;
+}
+
+.careTagChip {
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--td-brand-color-light);
+  color: var(--td-brand-color);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.outOfRangeTag {
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--td-warning-color-light);
+  color: var(--td-warning-color);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.strategyEffective {
+  color: var(--td-text-color-placeholder);
+  font-size: 12px;
+}
+
+.strategyCoverage {
+  margin-top: 2px;
+  color: var(--td-text-color-secondary);
+  font-size: 11px;
+}
+
+.channelChip {
+  display: inline-block;
+  margin: 2px 2px 2px 0;
+  padding: 2px 8px;
+  border: 1px solid var(--td-component-stroke);
+  border-radius: 10px;
+  background: var(--td-bg-color-secondarycontainer);
+  color: var(--td-text-color-primary);
+  font-size: 11px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.channelChipActive {
+  border-color: var(--td-brand-color);
+  background: var(--td-brand-color);
+  color: #fff;
+}
+
+.channelChipDisabled {
+  cursor: not-allowed;
+}
+
+.channelChipGray {
+  opacity: 0.45;
+}
+
+.rowSelected {
+  background: var(--td-brand-color-light);
+}
+
+.rowDimmed {
+  opacity: 0.6;
+}
+
+.strategyFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.selectedCount {
+  color: var(--td-text-color-placeholder);
+  font-size: 13px;
+}
+
+.tableEmpty {
+  padding: 32px 0;
+  color: var(--td-text-color-placeholder);
+  font-size: 13px;
+  text-align: center;
+}
+
+.dangerText {
+  color: var(--td-error-color);
+  font-weight: 500;
+}
+
+.warningText {
+  color: var(--td-warning-color-7);
+  font-weight: 500;
+}
+
+.successText {
+  color: var(--td-success-color);
+}
+
+.dimmedText {
+  color: var(--td-text-color-placeholder);
+}
+
+/* ===== 单策略详情 ===== */
+.detailHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.detailTitleLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.detailTitle {
+  color: var(--td-text-color-primary);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.detailRow {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.detailCardNarrow {
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--td-radius-medium);
+  background: var(--td-bg-color-container);
+
+  :global(.t-card__body) {
+    padding: 18px;
+  }
+}
+
+.detailCardWide {
+  flex: 2;
+  min-width: 0;
+  border-radius: var(--td-radius-medium);
+  background: var(--td-bg-color-container);
+
+  :global(.t-card__body) {
+    padding: 18px;
+  }
+}
+
+/* ===== 通用表格式（渠道拆分 / 用户触达 / 对比弹窗）===== */
+.plainTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+
+  th {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--td-component-stroke);
+    background: var(--td-bg-color-secondarycontainer);
+    color: var(--td-text-color-secondary);
+    font-weight: 500;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--td-component-stroke);
+    color: var(--td-text-color-primary);
+  }
+
+  tbody tr:hover {
+    background: var(--td-bg-color-container-hover);
+  }
+
+  .tableSummaryRow {
+    background: var(--td-bg-color-secondarycontainer);
+
+    td {
+      border-top: 1px solid var(--td-component-stroke);
+      color: var(--td-text-color-primary);
+      font-weight: 500;
+    }
+
+    &:hover {
+      background: var(--td-bg-color-secondarycontainer);
+    }
+  }
+}
+
+/* ===== 对比弹窗 ===== */
+.compareSummaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.compareSummaryCard {
+  position: relative;
+  padding: 14px 16px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--td-bg-color-container);
+  box-shadow: 0 1px 2px rgba(0, 21, 41, 0.03);
+}
+
+.compareSummaryAccent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+}
+
+.compareSummaryName {
+  margin-bottom: 10px;
+  padding-left: 8px;
+  color: var(--td-text-color-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.compareSummaryRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 8px;
+  color: var(--td-text-color-secondary);
+  font-size: 13px;
+
+  span:last-child {
+    color: var(--td-text-color-primary);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.bestValue {
+  color: var(--td-success-color);
+  font-weight: 600;
+}
+
+/* ===== 用户触达 ===== */
+.userSearchRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.userInput {
+  flex: 1;
+  max-width: 360px;
+}
+
+.userEmpty {
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.userEmptyTitle {
+  margin-bottom: 6px;
+  color: var(--td-text-color-placeholder);
+  font-size: 14px;
+}
+
+.userEmptySub {
+  color: var(--td-text-color-placeholder);
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.userEmptyRow {
+  padding: 24px;
+  color: var(--td-text-color-placeholder);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ===== 对比弹窗 ===== */
+.compareBody {
+  max-height: 64vh;
+  overflow-y: auto;
+}
+
+.compareTitle {
+  margin-bottom: 16px;
+  color: var(--td-text-color-primary);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.compareChartLabel {
+  margin: 16px 0 8px;
+  color: var(--td-text-color-primary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.compareLegend {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.compareLegendItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--td-text-color-secondary);
+  font-size: 12px;
+}
+
+.compareLegendLine {
+  display: inline-block;
+  width: 12px;
+  height: 2px;
+}
+
+@media (max-width: 1280px) {
+  .metricCards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .detailRow {
+    flex-direction: column;
+  }
+
+  .keywordInput {
+    margin-left: 0;
+  }
+
+  .trendGrid {
+    grid-template-columns: 1fr;
+  }
+}

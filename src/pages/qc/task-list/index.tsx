@@ -267,7 +267,10 @@ export default function TaskListPage() {
   }
 
   return (
-    <div className="legacy-scope h-full overflow-auto p-4">
+    <div
+      className="legacy-scope bg-white p-4"
+      style={{ margin: '-16px', minHeight: 'calc(100% + 32px)' }}
+    >
       <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-base font-semibold text-gray-900">人工质检任务</h1>

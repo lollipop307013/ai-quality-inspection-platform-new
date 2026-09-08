@@ -648,7 +648,10 @@ export default function AnnotationWorkbench({ taskName, onBack }: AnnotationWork
 
   if (!selectedRecord) {
     return (
-      <div className="legacy-scope h-full bg-white flex items-center justify-center p-6">
+      <div
+        className="legacy-scope bg-white flex items-center justify-center p-6"
+        style={{ margin: '-16px', height: 'calc(100% + 32px)' }}
+      >
         <div className="text-center">
           <div className="text-base font-medium text-gray-900">当前任务暂无可标注数据</div>
           <div className="text-xs text-gray-500 mt-2">请返回任务列表重新进入，或检查任务数据是否已加载。</div>
@@ -793,7 +796,10 @@ export default function AnnotationWorkbench({ taskName, onBack }: AnnotationWork
   }, [dedupExportRows])
 
   return (
-    <div className="legacy-scope h-full flex flex-col">
+    <div
+      className="legacy-scope bg-white flex flex-col"
+      style={{ margin: '-16px', height: 'calc(100% + 32px)' }}
+    >
       <div className="flex flex-col h-full">
         <div className="h-11 bg-white border-b border-gray-200 flex items-center justify-between px-4 gap-2 shrink-0">
           <div className="flex items-center gap-2 min-w-0">

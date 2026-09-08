@@ -1,0 +1,136 @@
+.page {
+  height: 100%;
+  overflow-y: auto;
+  padding: 16px;
+  background: var(--td-bg-color-page);
+  color: var(--td-text-color-primary);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+  }
+
+  p {
+    margin-top: 4px;
+    color: var(--td-text-color-placeholder);
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+.panel {
+  min-height: 400px;
+  padding: 24px;
+  border: 1px solid var(--td-component-stroke);
+  border-radius: 8px;
+  background: var(--td-bg-color-container);
+}
+
+.filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--td-component-stroke);
+}
+
+.filterItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 240px;
+
+  > span {
+    color: var(--td-text-color-primary);
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+.filterActions {
+  padding-bottom: 1px;
+}
+
+.tableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0 16px;
+
+  span:first-child {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  span:last-child {
+    color: var(--td-text-color-placeholder);
+    font-size: 14px;
+  }
+}
+
+.applicationName {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--td-brand-color);
+  font-weight: 500;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.tableState {
+  display: flex;
+  min-height: 260px;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingPlaceholder {
+  height: 220px;
+}
+
+.dialogForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 8px 0;
+
+  label {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+
+    > span {
+      color: var(--td-text-color-primary);
+      font-size: 14px;
+      text-align: right;
+    }
+
+    i {
+      margin-right: 4px;
+      color: var(--td-error-color);
+      font-style: normal;
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .filters {
+    gap: 16px;
+  }
+
+  .filterItem {
+    width: 220px;
+  }
+}

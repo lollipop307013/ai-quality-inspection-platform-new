@@ -1,0 +1,38 @@
+.page {
+  min-height: 100%;
+  padding: 16px;
+  background: var(--td-bg-color-page);
+  color: var(--td-text-color-primary);
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  h1 {
+    flex-shrink: 0;
+    margin: 0;
+    color: var(--td-text-color-primary);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+  }
+}
+
+.sectionCard {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background: var(--td-bg-color-container);
+  box-shadow: none;
+
+  :global(.t-card__header) {
+    display: none;
+  }
+
+  :global(.t-card__body) {
+    padding: 0;
+  }
+}

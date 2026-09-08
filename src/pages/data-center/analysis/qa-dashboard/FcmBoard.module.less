@@ -1,0 +1,353 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.boardHeader {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border: 1px solid var(--td-component-stroke);
+  border-radius: 8px;
+  background: var(--td-bg-color-container);
+}
+
+.boardTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  h2 {
+    margin: 0;
+    color: var(--td-text-color-primary);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26px;
+  }
+}
+
+.boardSubtitle {
+  color: var(--td-text-color-placeholder);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.weekBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.weekPicker {
+  width: 180px;
+  flex-shrink: 0;
+}
+
+.weekHint {
+  color: var(--td-text-color-secondary);
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.sectionCard {
+  border-radius: 8px;
+  background: var(--td-bg-color-container);
+  box-shadow: none;
+
+  :global(.t-card__header) {
+    padding: 20px 24px 0;
+  }
+
+  :global(.t-card__header-wrapper) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  :global(.t-card__title) {
+    color: var(--td-text-color-primary);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  :global(.t-card__description) {
+    margin: 0;
+    color: var(--td-text-color-placeholder);
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  :global(.t-card__body) {
+    padding: 6px 24px 20px;
+  }
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metricItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  min-height: 96px;
+  padding: 16px 20px;
+  border: 1px solid var(--td-component-stroke);
+  border-radius: 6px;
+  background: var(--td-bg-color-container);
+}
+
+.metricLabel {
+  display: flex;
+  align-items: center;
+  color: var(--td-text-color-secondary);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.metricValue {
+  color: var(--td-text-color-primary);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tone-accent {
+  .metricValue {
+    color: var(--td-brand-color);
+  }
+}
+
+.tone-positive {
+  .metricValue {
+    color: var(--td-success-color);
+  }
+}
+
+.dailyChart {
+  width: 100%;
+  height: 280px !important;
+  min-height: 220px;
+}
+
+.activeUserCard {
+  :global(.t-card__body) {
+    padding: 6px 24px 20px;
+  }
+
+  :global(.t-table) {
+    width: 100%;
+  }
+}
+
+.detailCard,
+.topQuestionCard {
+  :global(.t-card__body) {
+    padding: 6px 24px 20px;
+  }
+}
+
+.classificationLayout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.7fr) minmax(420px, 1.3fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.l1ChartCard,
+.l2ChartCard {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--td-component-stroke);
+  border-radius: 6px;
+  background: var(--td-bg-color-container-hover);
+}
+
+.l1Chart {
+  width: 100%;
+  height: 320px !important;
+  min-height: 240px;
+}
+
+.l2Grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.l2Chart {
+  width: 100%;
+  height: 220px !important;
+  min-height: 180px;
+}
+
+.subhead {
+  margin: 0;
+  color: var(--td-text-color-primary);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+}
+
+.svipCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 480px;
+  padding: 16px 20px;
+  border: 1px solid var(--td-component-stroke);
+  border-radius: 6px;
+  background: var(--td-bg-color-container);
+}
+
+.svipHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.svipLabel {
+  color: var(--td-text-color-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.svipValue {
+  color: var(--td-text-color-primary);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 44px;
+  font-variant-numeric: tabular-nums;
+}
+
+.svipMeta {
+  color: var(--td-text-color-placeholder);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.svipNote {
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: var(--td-success-color-light);
+  color: var(--td-success-color);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.dialogList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 60vh;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+}
+
+.dialogItem {
+  padding: 12px 16px;
+  border: 1px solid var(--td-component-stroke);
+  border-radius: 6px;
+  background: var(--td-bg-color-container);
+}
+
+.dialogMeta {
+  margin-bottom: 8px;
+  color: var(--td-text-color-placeholder);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.dialogQuestion,
+.dialogAnswer {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+  color: var(--td-text-color-primary);
+  font-size: 13px;
+  line-height: 22px;
+  white-space: pre-wrap;
+}
+
+.dialogQuestion {
+  align-items: flex-start;
+  font-weight: 600;
+}
+
+.dialogAnswer {
+  align-items: flex-start;
+  color: var(--td-text-color-secondary);
+}
+
+.dialogTag {
+  flex-shrink: 0;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--td-brand-color);
+  color: var(--td-text-color-anti);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+}
+
+.dialogAnswer .dialogTag {
+  background: var(--td-success-color);
+}
+
+.loadingPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 160px;
+}
+
+.dailyLoading,
+.activeUserLoading,
+.l1Loading,
+.detailLoading,
+.topQuestionLoading,
+.svipLoading {
+  min-height: 200px;
+}
+
+@media (max-width: 1280px) {
+  .metricGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .classificationLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .l2Grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .boardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
