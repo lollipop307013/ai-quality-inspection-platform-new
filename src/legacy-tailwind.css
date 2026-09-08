@@ -1,0 +1,42 @@
+/* 旧版「AI 质检优化平台」Tailwind + shadcn 样式体系。
+ * 仅供 src/pages/qc 下迁移页面使用，颜色变量使用 --legacy- 前缀避免与框架自身样式冲突。
+ * 不引入 Tailwind Preflight（基础重置），因此不会影响 AppShell、antd、TDesign 组件的默认样式。
+ */
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --legacy-background: 0 0% 100%;
+  --legacy-foreground: 0 0% 3.9%;
+  --legacy-card: 0 0% 100%;
+  --legacy-card-foreground: 0 0% 3.9%;
+  --legacy-popover: 0 0% 100%;
+  --legacy-popover-foreground: 0 0% 3.9%;
+  --legacy-primary: 0 0% 9%;
+  --legacy-primary-foreground: 0 0% 98%;
+  --legacy-secondary: 0 0% 96.1%;
+  --legacy-secondary-foreground: 0 0% 9%;
+  --legacy-muted: 0 0% 96.1%;
+  --legacy-muted-foreground: 0 0% 45.1%;
+  --legacy-accent: 0 0% 96.1%;
+  --legacy-accent-foreground: 0 0% 9%;
+  --legacy-destructive: 0 84.2% 60.2%;
+  --legacy-destructive-foreground: 0 0% 98%;
+  --legacy-border: 0 0% 89.8%;
+  --legacy-input: 0 0% 89.8%;
+  --legacy-ring: 0 0% 3.9%;
+  --legacy-radius: 0.5rem;
+}
+
+/* 迁移页面根容器：还原旧平台的盒模型与基础排版，不影响容器之外的框架元素 */
+.legacy-scope {
+  box-sizing: border-box;
+  color: hsl(var(--legacy-foreground));
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.legacy-scope *,
+.legacy-scope *::before,
+.legacy-scope *::after {
+  box-sizing: border-box;
+}
