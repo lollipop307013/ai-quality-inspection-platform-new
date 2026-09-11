@@ -2,6 +2,86 @@
  * 仅供 src/pages/qc 下迁移页面使用，颜色变量使用 --legacy- 前缀避免与框架自身样式冲突。
  * 不引入 Tailwind Preflight（基础重置），因此不会影响 AppShell、antd、TDesign 组件的默认样式。
  */
+
+/* 下面这段是 Tailwind Preflight 里对原生表单元素/边框的等效重置，仅作用于 .legacy-scope 内部。
+ * 用 :where(.legacy-scope) 包裹选择器：既能限定作用范围，又把额外的类选择器"清零"，
+ * 保持跟 Tailwind 原生 Preflight 一样低的选择器优先级（等同于裸 `button{}`），
+ * 这样后面 `@tailwind components/utilities` 生成的工具类（.border、.bg-white、.text-[10px] 等）
+ * 才能按 CSS 层叠顺序正常覆盖这里的重置值。
+ * 否则像"下载""更多"这类不带 border/bg 类的 ghost 按钮，会露出浏览器原生 <button> 默认外观
+ * （灰底 + 凸起边框），跟旧平台的纯文字按钮不一致。
+ */
+:where(.legacy-scope) *,
+:where(.legacy-scope) *::before,
+:where(.legacy-scope) *::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: hsl(0 0% 89.8%);
+}
+
+:where(.legacy-scope) button,
+:where(.legacy-scope) input,
+:where(.legacy-scope) optgroup,
+:where(.legacy-scope) select,
+:where(.legacy-scope) textarea {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+:where(.legacy-scope) button,
+:where(.legacy-scope) [type='button'],
+:where(.legacy-scope) [type='reset'],
+:where(.legacy-scope) [type='submit'] {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+:where(.legacy-scope) button,
+:where(.legacy-scope) [role='button'] {
+  cursor: pointer;
+}
+
+:where(.legacy-scope) :disabled {
+  cursor: default;
+}
+
+:where(.legacy-scope) table {
+  border-collapse: collapse;
+}
+
+:where(.legacy-scope) legend {
+  padding: 0;
+}
+
+:where(.legacy-scope) ol,
+:where(.legacy-scope) ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:where(.legacy-scope) h1,
+:where(.legacy-scope) h2,
+:where(.legacy-scope) h3,
+:where(.legacy-scope) h4,
+:where(.legacy-scope) h5,
+:where(.legacy-scope) h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+}
+
+:where(.legacy-scope) p {
+  margin: 0;
+}
+
 @tailwind components;
 @tailwind utilities;
 
@@ -33,10 +113,4 @@
   box-sizing: border-box;
   color: hsl(var(--legacy-foreground));
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.legacy-scope *,
-.legacy-scope *::before,
-.legacy-scope *::after {
-  box-sizing: border-box;
 }

@@ -14,12 +14,23 @@ import {
 import { Badge } from '@/components/ui/badge'
 import ExportResultDialog from '@/components/export-result-dialog'
 import { ChevronDown, MoreHorizontal, Plus, Search } from 'lucide-react'
-import { RiskLevel, useOnlineChannelStore } from '@/store/onlineStore'
+import { RiskLevel, RISK_LEVELS, useOnlineChannelStore } from '@/store/onlineStore'
 import AnnotationWorkbench from './AnnotationWorkbench'
 
 type TaskStatus = '进行中' | '待分配' | '待处理'
 
 type PageMode = 'task' | 'trigger'
+
+interface TaskStats {
+  /** 已标注总数 */
+  totalAnnotated: number
+  /** 合格率（%，无风险 + 低风险错误） */
+  qualifiedRate: number
+  /** 高风险率（%，高风险错误 + 极高风险错误） */
+  highRiskRate: number
+  /** 各风险等级数量分布 */
+  distribution: Record<RiskLevel, number>
+}
 
 interface OnlineTask {
   id: string
@@ -33,6 +44,7 @@ interface OnlineTask {
   createdAt: string
   progressDone: number
   progressTotal: number
+  stats: TaskStats
 }
 
 interface TriggerCard {
@@ -71,6 +83,12 @@ const mockTasks: OnlineTask[] = [
     createdAt: '2026/07/22',
     progressDone: 2,
     progressTotal: 587,
+    stats: {
+      totalAnnotated: 187,
+      qualifiedRate: 77.0,
+      highRiskRate: 8.0,
+      distribution: { 无风险: 112, 低风险错误: 32, 中风险错误: 28, 高风险错误: 9, 极高风险错误: 6 },
+    },
   },
   {
     id: 'test-2',
@@ -84,6 +102,12 @@ const mockTasks: OnlineTask[] = [
     createdAt: '2026/07/22',
     progressDone: 0,
     progressTotal: 587,
+    stats: {
+      totalAnnotated: 36,
+      qualifiedRate: 80.6,
+      highRiskRate: 8.3,
+      distribution: { 无风险: 21, 低风险错误: 8, 中风险错误: 4, 高风险错误: 2, 极高风险错误: 1 },
+    },
   },
   {
     id: 'wss',
@@ -97,6 +121,12 @@ const mockTasks: OnlineTask[] = [
     createdAt: '2026/04/17',
     progressDone: 0,
     progressTotal: 498,
+    stats: {
+      totalAnnotated: 95,
+      qualifiedRate: 81.1,
+      highRiskRate: 8.4,
+      distribution: { 无风险: 58, 低风险错误: 19, 中风险错误: 10, 高风险错误: 5, 极高风险错误: 3 },
+    },
   },
   {
     id: 'wss-qa',
@@ -110,6 +140,12 @@ const mockTasks: OnlineTask[] = [
     createdAt: '2026/04/14',
     progressDone: 0,
     progressTotal: 518,
+    stats: {
+      totalAnnotated: 142,
+      qualifiedRate: 81.7,
+      highRiskRate: 7.7,
+      distribution: { 无风险: 89, 低风险错误: 27, 中风险错误: 15, 高风险错误: 7, 极高风险错误: 4 },
+    },
   },
   {
     id: 'wss-2',
@@ -123,6 +159,12 @@ const mockTasks: OnlineTask[] = [
     createdAt: '2026/04/14',
     progressDone: 0,
     progressTotal: 430,
+    stats: {
+      totalAnnotated: 66,
+      qualifiedRate: 78.8,
+      highRiskRate: 9.1,
+      distribution: { 无风险: 40, 低风险错误: 12, 中风险错误: 8, 高风险错误: 4, 极高风险错误: 2 },
+    },
   },
 ]
 
@@ -236,30 +278,55 @@ export default function TaskListPage() {
 
   const handleTaskExport = () => {
     if (!selectedTaskForExport) return
+    const task = selectedTaskForExport
+    const stats = task.stats
+
     const row = {
-      任务ID: selectedTaskForExport.id,
-      任务名称: selectedTaskForExport.name,
-      状态: selectedTaskForExport.status,
-      项目: selectedTaskForExport.sourceScene,
-      事件: selectedTaskForExport.sourceEvent,
-      渠道: selectedTaskForExport.channel,
-      创建时间: selectedTaskForExport.createdAt,
-      任务进度: `${selectedTaskForExport.progressDone}/${selectedTaskForExport.progressTotal}`,
+      任务ID: task.id,
+      任务名称: task.name,
+      状态: task.status,
+      项目: task.sourceScene,
+      事件: task.sourceEvent,
+      渠道: task.channel,
+      创建时间: task.createdAt,
+      任务进度: `${task.progressDone}/${task.progressTotal}`,
+      已标注数: stats.totalAnnotated,
+      合格率: `${stats.qualifiedRate.toFixed(1)}%`,
+      高风险率: `${stats.highRiskRate.toFixed(1)}%`,
     }
 
+    const qualifiedCount = stats.distribution['无风险'] + stats.distribution['低风险错误']
+    const highRiskCount = stats.distribution['高风险错误'] + stats.distribution['极高风险错误']
+    const summaryRows: Array<{ 统计项: string; 数值: string | number }> = [
+      { 统计项: '任务名称', 数值: task.name },
+      { 统计项: '已标注数', 数值: stats.totalAnnotated },
+      { 统计项: '合格数（无风险+低风险）', 数值: qualifiedCount },
+      { 统计项: '合格率', 数值: `${stats.qualifiedRate.toFixed(1)}%` },
+      { 统计项: '高风险数（高风险+极高风险）', 数值: highRiskCount },
+      { 统计项: '高风险率', 数值: `${stats.highRiskRate.toFixed(1)}%` },
+      { 统计项: '', 数值: '' },
+      { 统计项: '风险等级', 数值: '数量（占比）' },
+      ...RISK_LEVELS.map((level) => ({
+        统计项: level,
+        数值: `${stats.distribution[level]}（${((stats.distribution[level] / stats.totalAnnotated) * 100).toFixed(1)}%）`,
+      })),
+    ]
+
     const sheet = XLSX.utils.json_to_sheet([row])
+    const summarySheet = XLSX.utils.json_to_sheet(summaryRows, { header: ['统计项', '数值'], skipHeader: true })
     const workbook = XLSX.utils.book_new()
-    XLSX.utils.book_append_sheet(workbook, sheet, '任务导出')
+    XLSX.utils.book_append_sheet(workbook, sheet, '任务信息')
+    XLSX.utils.book_append_sheet(workbook, summarySheet, '统计汇总')
 
     const now = new Date()
     const stamp = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}_${String(
       now.getHours()
     ).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`
-    const filename = `任务导出_${selectedTaskForExport.id}_${stamp}.xlsx`
+    const filename = `任务导出_${task.id}_${stamp}.xlsx`
 
     XLSX.writeFile(workbook, filename)
     setExportOpen(false)
-    window.alert(`导出成功：${filename}`)
+    window.alert(`导出成功：${filename}\n包含 2 张 sheet：任务信息、统计汇总`)
   }
 
   if (view === 'workbench' && activeTask) {
@@ -357,10 +424,26 @@ export default function TaskListPage() {
                   <div>任务进度: {task.progressDone}/{task.progressTotal}</div>
                 </div>
 
+                <div className="flex items-center gap-3 rounded bg-gray-50 border border-gray-100 px-2.5 py-1.5 mb-2.5">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-[10px] text-gray-400">合格率</span>
+                    <span className="text-[11px] font-semibold text-emerald-600">
+                      {task.stats.qualifiedRate.toFixed(1)}%
+                    </span>
+                  </div>
+                  <div className="w-px h-3.5 bg-gray-200" />
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-[10px] text-gray-400">高风险率</span>
+                    <span className="text-[11px] font-semibold text-rose-500">
+                      {task.stats.highRiskRate.toFixed(1)}%
+                    </span>
+                  </div>
+                </div>
+
                 <div className="flex items-center gap-2">
                   <Button
                     size="sm"
-                    className="h-5.5 text-[10px] px-2 bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
+                    className="h-[22px] text-[10px] px-2 bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
                     onClick={() => {
                       setActiveTask(task)
                       setView('workbench')
@@ -371,7 +454,7 @@ export default function TaskListPage() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="h-5.5 text-[10px] px-1.5 text-gray-600"
+                    className="h-[22px] text-[10px] px-1.5 text-gray-600"
                     onClick={() => {
                       setSelectedTaskForExport(task)
                       setExportOpen(true)
@@ -379,7 +462,7 @@ export default function TaskListPage() {
                   >
                     下载
                   </Button>
-                  <Button variant="ghost" size="sm" className="h-5.5 text-[10px] px-1 text-gray-600">
+                  <Button variant="ghost" size="sm" className="h-[22px] text-[10px] px-1 text-gray-600">
                     更多
                   </Button>
                   <MoreHorizontal className="w-3.5 h-3.5 text-gray-400 ml-auto" />
@@ -412,13 +495,13 @@ export default function TaskListPage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" className="h-5.5 text-[10px] px-2">
+                  <Button variant="outline" size="sm" className="h-[22px] text-[10px] px-2">
                     触发配置
                   </Button>
-                  <Button variant="ghost" size="sm" className="h-5.5 text-[10px] px-1.5 text-gray-600">
+                  <Button variant="ghost" size="sm" className="h-[22px] text-[10px] px-1.5 text-gray-600">
                     关闭
                   </Button>
-                  <Button variant="ghost" size="sm" className="h-5.5 text-[10px] px-1 text-gray-600">
+                  <Button variant="ghost" size="sm" className="h-[22px] text-[10px] px-1 text-gray-600">
                     更多
                   </Button>
                   <MoreHorizontal className="w-3.5 h-3.5 text-gray-400 ml-auto" />
@@ -449,12 +532,11 @@ export default function TaskListPage() {
         annotatorOptions={exportAnnotatorOptions}
         selectedAnnotators={exportAnnotators}
         onSelectedAnnotatorsChange={setExportAnnotators}
-        dedupCount={selectedTaskForExport ? 1 : 0}
-        rawCount={selectedTaskForExport ? 1 : 0}
+        dedupCount={selectedTaskForExport ? selectedTaskForExport.stats.totalAnnotated : 0}
+        rawCount={selectedTaskForExport ? selectedTaskForExport.stats.totalAnnotated : 0}
         onConfirm={handleTaskExport}
         confirmDisabled={!selectedTaskForExport}
         title="导出任务信息"
-        showFilters={false}
         summaryContent={
           selectedTaskForExport ? (
             <div className="rounded-md border border-gray-200 divide-y divide-gray-100 text-xs">
@@ -470,6 +552,8 @@ export default function TaskListPage() {
                   label: '任务进度',
                   value: `${selectedTaskForExport.progressDone}/${selectedTaskForExport.progressTotal}`,
                 },
+                { label: '合格率', value: `${selectedTaskForExport.stats.qualifiedRate.toFixed(1)}%` },
+                { label: '高风险率', value: `${selectedTaskForExport.stats.highRiskRate.toFixed(1)}%` },
               ].map((item) => (
                 <div key={item.label} className="flex items-start px-3 py-2 gap-3">
                   <span className="w-16 shrink-0 text-gray-400">{item.label}</span>

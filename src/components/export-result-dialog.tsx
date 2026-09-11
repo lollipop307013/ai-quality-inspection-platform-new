@@ -86,7 +86,7 @@ export default function ExportResultDialog({
         </DialogHeader>
 
         <div className="space-y-4 text-sm">
-          {!showFilters && summaryContent}
+          {summaryContent}
           {showFilters && (
             <>
               <div>
